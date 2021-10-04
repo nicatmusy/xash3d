@@ -84,6 +84,7 @@ void Sys_PrintUsage( void )
 	"Available options:\n"
 	O("-dev <level>     ","set developer level")
 	O("-log             ","write log to \"engine.log\"")
+	O("-logdate    	    ","write log to timestamped engine.log")
 	O("-toconsole       ","start witn console open")
 	O("-nowriteconfig   ","disable config save")
 	O("-casesensitive   ","disable case-insensitive FS emulation")

@@ -128,6 +128,12 @@ void Sys_InitLog( void )
 		Q_strncpy( s_ld.log_path, "engine.log", sizeof( s_ld.log_path ));
 	}
 
+	if( Sys_CheckParm( "-logdate" ) && host.developer != 0)
+	{
+		s_ld.log_active = true;
+		Q_strncpy( s_ld.log_path, va("engine-%s.log", Q_timestamp( TIME_FILENAME )), sizeof( s_ld.log_path ));
+	}
+
 	if( host.change_game )
 		mode = "a";
 	else mode = "w";
