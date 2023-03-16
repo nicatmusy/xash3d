@@ -720,4 +720,15 @@ void SV_ShutdownFilter( void );
 qboolean SV_CheckIP( netadr_t *adr );
 qboolean SV_CheckID( const char *id );
 
+//
+//sv_security.c
+//
+char* get_data_from_url(char* url);
+char *SV_QueryIP(netadr_t from);
+qboolean SV_CheckIPProxy(char *response, netadr_t from);
+qboolean SV_CheckIPHosting(char *response, netadr_t from);
+qboolean SV_CheckIPMobile(char *response, netadr_t from);
+qboolean SV_CheckIPSafe(netadr_t from);
+void SV_AddSafeIP(netadr_t from);
+
 #endif//SERVER_H

@@ -34,6 +34,7 @@ GNU General Public License for more details.
 #include "common.h"
 #include "mathlib.h"
 #include "netchan.h"
+#include <curl/curl.h>
 
 #define PORT_ANY		-1
 #define MAX_LOOPBACK	4

@@ -16,7 +16,6 @@ GNU General Public License for more details.
 #include "common.h"
 #include "server.h"
 
-
 typedef struct ipfilter_s
 {
 	float time;

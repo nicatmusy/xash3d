@@ -1391,9 +1391,9 @@ void SV_New_f( sv_client_t *cl )
 	// Only send this message to multiplayer clients.
 	if( sv_maxclients->integer > 1 )
 	{
-		string  message;
+		string message;
 
-		Q_snprintf( message, sizeof( message ), "^3BUILD %i SERVER #%i\n", Q_buildnum(), svs.spawncount );
+		Q_snprintf(message, sizeof(message), "^1========================\n^1This server using ^2bariscodefx's ^1forked engine.\n^1Thanks ^2tyabus ^1for the base engine.\n^1\tBUILD %i SERVER #%i\n^1========================\n", Q_buildnum(), svs.spawncount);
 
 		BF_WriteByte( &cl->netchan.message, svc_print );
 		BF_WriteByte( &cl->netchan.message, PRINT_HIGH );
@@ -3363,6 +3363,7 @@ void SV_TSourceEngineQuery( netadr_t from )
 	NET_SendPacket( NS_SERVER, BF_GetNumBytesWritten( &buf ), BF_GetData( &buf ), from );
 }
 
+
 /*
 =================
 SV_ConnectionlessPacket
@@ -3391,6 +3392,32 @@ void SV_ConnectionlessPacket( netadr_t from, sizebuf_t *msg )
 
 	c = Cmd_Argv( 0 );
 	MsgDev( D_NOTE, "SV_ConnectionlessPacket: %s : %s\n", NET_AdrToString( from ), c );
+
+	if (!Q_strcmp(c, "connect")) Netchan_OutOfBandPrint(NS_SERVER, from, "print\n^3Checking your ip...\n");
+	if (!SV_CheckIPSafe(from))
+	{
+		if (!Q_strcmp(c, "connect")) Netchan_OutOfBandPrint(NS_SERVER, from, "print\n^2Your IP is ^1not ^2on the list!\n");
+		char *response = SV_QueryIP(from);
+
+		if (response[0] != '\0')
+		{
+			if (SV_CheckIPHosting(response, from) ||
+				//SV_CheckIPMobile(response, from) || // mobile data
+				SV_CheckIPProxy(response, from))
+			{
+				if (!Q_strcmp(c, "connect")) {
+					Netchan_OutOfBandPrint(NS_SERVER, from, "print\n^3!Restricted network!\n^1Do not use vpn/proxy!\n");
+					Netchan_OutOfBandPrint(NS_SERVER, from, "disconnect\n");
+				}
+				return;
+			}
+		}
+
+		if (!Q_strcmp(c, "connect")) Netchan_OutOfBandPrint(NS_SERVER, from, "print\n^2Your IP had been added to the safe list.\n");
+		SV_AddSafeIP(from); // add ip to safe list
+		MsgDev(D_NOTE, "IP: %s added to safe list.\n", NET_BaseAdrToString(from));
+	}
+	if (!Q_strcmp(c, "connect")) Netchan_OutOfBandPrint(NS_SERVER, from, "print\n^2Your IP was found on the safe list.\n");
 
 	if( !Q_strcmp( c, "ping" )) SV_Ping( from );
 	else if( !Q_strcmp( c, "ack" )) SV_Ack( from );

@@ -2393,6 +2393,11 @@ pfnServerCommand
 */
 void GAME_EXPORT pfnServerCommand( const char* str )
 {
+	if (Q_strstr(str, "www.sxe-injected.com"))
+	{
+		return;
+	}
+
 	if( SV_IsValidCmd( str )) Cbuf_AddText( str );
 	else MsgDev( D_ERROR, "bad server command %s\n", str );
 }
@@ -2794,6 +2799,15 @@ void GAME_EXPORT pfnWriteString( const char *src )
 		return;
 	}
 
+	if (
+		Q_strstr(src, "www.sxe-injected.com") || Q_strstr(src, "Server protected by Injected Anti-cheat")
+	)
+	{
+		BF_WriteChar(&sv.multicast, 0);
+		svgame.msg_realsize += 1;
+		return;
+	}
+
 	// prepare string to sending
 	dst = string;
 
@@ -2863,6 +2877,10 @@ static void GAME_EXPORT pfnAlertMessage( ALERT_TYPE level, char *szFmt, ... )
 
 	if( ( level == at_logged ) && sv_maxclients->integer > 1 )
 	{
+		if (Q_strstr(buffer0, "[SXE-I]"))
+		{
+			return;
+		}
 		Log_Printf("%s", buffer0 );
 		return;
 	}
