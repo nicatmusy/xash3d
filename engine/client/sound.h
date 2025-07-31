@@ -288,8 +288,8 @@ sound_t S_RegisterSound( const char *name );
 void S_FreeSound( sfx_t *sfx );
 
 // s_dsp.c
-qboolean AllocDsps( void );
-void FreeDsps( void );
+void SX_Init( void );
+void SX_Free();
 void CheckNewDspPresets( void );
 void DSP_Process( int idsp, portable_samplepair_t *pbfront, int sampleCount );
 void DSP_ClearState( void );

@@ -1844,7 +1844,7 @@ qboolean S_Init( void )
 	S_InitScaletable ();
 	S_StopAllSounds ();
 	VOX_Init ();
-	AllocDsps ();
+	SX_Init ();
 
 	return true;
 #else // XASH_SOUND != SOUND_NULL
@@ -1874,7 +1874,7 @@ void S_Shutdown( void )
 	S_StopAllSounds ();
 	S_FreeSounds ();
 	VOX_Shutdown ();
-	FreeDsps ();
+	SX_Free ();
 
 	SNDDMA_Shutdown ();
 	MIX_FreeAllPaintbuffers ();
