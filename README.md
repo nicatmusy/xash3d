@@ -1,4 +1,6 @@
-# Xash3D FWGS Engine (Fork) [![Coverity Scan](https://scan.coverity.com/projects/21970/badge.svg)](https://scan.coverity.com/projects/tyabus-xash3d) [![Build Status](https://gitlab.com/tyabus/xash3d/badges/master/pipeline.svg)](https://gitlab.com/tyabus/xash3d/-/pipelines) [![Windows Build Status](https://ci.appveyor.com/api/projects/status/github/tyabus/xash3d?svg=true)](https://ci.appveyor.com/project/tyabus/xash3d)
+# Xash3D-NG Engine [![Coverity Scan](https://scan.coverity.com/projects/21970/badge.svg)](https://scan.coverity.com/projects/tyabus-xash3d) [![Build Status](https://gitlab.com/tyabus/xash3d/badges/master/pipeline.svg)](https://gitlab.com/tyabus/xash3d/-/pipelines) [![Windows Build Status](https://ci.appveyor.com/api/projects/status/github/tyabus/xash3d?svg=true)](https://ci.appveyor.com/project/tyabus/xash3d)
+
+**DEPRECATED in favor of https://github.com/FWGS/xash3d-fwgs**
 
 Original project: [Xash3D Engine on ModDB](https://www.moddb.com/engines/xash3d-engine)  
 Original codebase we're based on: [Xash3d FWGS (Old) on GitHub](https://github.com/FWGS/xash3d)
