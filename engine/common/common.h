@@ -196,7 +196,7 @@ typedef enum
 #include "crtlib.h"
 #include "base_cmd.h"
 
-#define XASH_VERSION	"0.19.4"		// engine current version
+#define XASH_VERSION	"0.21"		// engine current version
 
 // generic update page, see ShellExecute
 #define XASH_UPDATE_PAGE "https://github.com/tyabus/xash3d/releases/latest"
